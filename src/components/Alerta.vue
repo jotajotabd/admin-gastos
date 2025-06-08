@@ -5,7 +5,7 @@
 
 <template>
     <div class="bg-white border-l-6
-                text-lg
+                text-md
                 font-bold
                 p-5
                 text-red-600
