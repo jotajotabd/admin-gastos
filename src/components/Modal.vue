@@ -21,12 +21,16 @@ const props = defineProps({
     categoria: {
         type: String,
         required: true
+    },
+    disponible:{
+        type: Number,
+        required: true
     }
 })
 
 const agregarGasto = () => {
     // Validando los campos
-    const { nombre, cantidad, categoria } = props
+    const { nombre, cantidad, categoria, disponible } = props
     if ([nombre, cantidad, categoria].includes('')){
         error.value = 'Todos los campos son obligatorios'
         setTimeout(() => {
@@ -48,6 +52,15 @@ const agregarGasto = () => {
         },3000)
         return;
     }
+    // Validar Disponible
+    if (cantidad > disponible) {
+        error.value = 'Has excedido el presupuesto'
+        setTimeout(() => {
+            error.value = ''
+        },3000)
+        return;
+    }
+
 
     emit('guardar-gasto')
     // // Emitir el evento para agregar el gasto

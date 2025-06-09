@@ -1,9 +1,10 @@
 <script setup>
+import { computed } from 'vue';
 import imagen from '../assets/img/grafico.jpg';
 import { formatearCantidad } from '../helpers';
 
 
-defineProps({
+const props = defineProps({
     presupuesto:{
         type: Number,
         required: true
@@ -11,8 +12,19 @@ defineProps({
     disponible:{
         type: Number,
         required: true
+    },
+    gastado:{
+        type: Number,
+        required: true
     }
 })
+
+// Forma para dar el total de disponible por el envio de props --> Cambiar la forma de llamarlo en el span "formatearCantidad(totalDisponible)"
+// const totalDisponible = computed(() => {
+//         return props.presupuesto - props.gastado
+// })
+
+
 </script>
 
 <template>
@@ -32,7 +44,7 @@ defineProps({
                     <span class="font-bold text-blue-500">Disponible: </span>{{ formatearCantidad(disponible) }}
                 </p>
                 <p class="text-gray-600">
-                    <span class="font-bold text-blue-500">Gastado: </span>0$
+                    <span class="font-bold text-blue-500">Gastado: </span> {{ formatearCantidad(gastado) }}
                 </p>
             </div>
         </div>

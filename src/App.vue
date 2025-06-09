@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive } from 'vue';
+import { ref, reactive, watch } from 'vue';
 import { uid } from 'uid';
 import { generarId  } from './helpers';
 import Presupuesto from './components/Presupuesto.vue';
@@ -27,6 +27,22 @@ const gasto = reactive({
 
 const gastos = ref([])
 
+watch(gastos, () =>{
+    const totalGastado = gastos.value.reduce((total, gasto) => gasto.cantidad + total, 0)
+    gastado.value = totalGastado
+    disponible.value = presupuesto.value - totalGastado
+}, {
+    deep:true
+})
+
+watch(modal, () =>{
+    if(!modal.mostrar){
+        limpiarModal()
+    }
+}, {
+    deep:true
+})
+
 const definirPresupuesto = (cantidad) => {
     presupuesto.value = cantidad;
     disponible.value = cantidad;
@@ -48,13 +64,27 @@ const ocultarModal = () => {
 }
 
 const guardarGasto = () => {
-    gastos.value.push({
-        ...gasto,
-        id: generarId() // Generar id sin dependencias
-        // id: uid(),
-    })
-    ocultarModal()
-    Object.assign(gasto, {
+        if(gasto.id){
+            //Editar registro
+            const {id} = gasto
+            const index = gastos.value.findIndex((g) => g.id === gasto.id)
+            gastos.value[index] = {
+                ...gasto
+            }
+        }else{
+            //Registro nuevo
+            gastos.value.push({
+                ...gasto,
+                id: generarId() // Generar id sin dependencias
+                // id: uid(),
+            })
+        }
+        ocultarModal()
+        // Limpiar campos del modal
+        limpiarModal()
+    }
+const limpiarModal = () => {
+        Object.assign(gasto, {
         nombre: '',
         cantidad: '',
         categoria: '',
@@ -62,10 +92,17 @@ const guardarGasto = () => {
         fecha: Date.now()
     })
 }
+
+const editarGasto = id => {
+    const gastoAEditar = gastos.value.filter(gasto => gasto.id === id)[0]
+    Object.assign(gasto, gastoAEditar)
+    mostrarModal()
+}
+
 </script>
 
 <template>
-    <div class="bg-gray-200 h-screen">
+    <div class="bg-gray-200 h-screen" :class="[modal.mostrar] ? 'overflow-scroll': 'overflow-hidden'">
         <header class="bg-blue-500 p-10">
             <h1 class="text-white font-bold text-center">
                 Planificador de Gastos
@@ -79,6 +116,7 @@ const guardarGasto = () => {
                     v-else
                     :presupuesto="presupuesto"
                     :disponible="disponible"
+                    :gastado="gastado"
                 />
             </div>
         </header>
@@ -96,19 +134,19 @@ const guardarGasto = () => {
                     v-for="gasto in gastos"
                     :key="gasto.id"
                     :gasto="gasto"
+                    @editar-gasto="editarGasto"
                 />
             </div>
-            <div class="">
-                <img    :src="ImagenAgregarGasto"
-                        alt="Imagen de agregar gasto"
-                        class="w-20 p-2 m-2 fixed bottom-5 right-5 rounded-full shadow-xl cursor-pointer"
-                        @click="mostrarModal"
-                />
-            </div>
+            <img    :src="ImagenAgregarGasto"
+                    alt="Imagen de agregar gasto"
+                    class="w-20 p-2 m-2 fixed bottom-5 right-5 rounded-full shadow-xl cursor-pointer"
+                    @click="mostrarModal"
+            />
             <Modal  v-if="modal.mostrar"
                     @ocultar-modal="ocultarModal"
                     @guardar-gasto="guardarGasto"
                     :modal="modal"
+                    :disponible="disponible"
                     v-model:nombre="gasto.nombre"
                     v-model:cantidad="gasto.cantidad"
                     v-model:categoria="gasto.categoria"

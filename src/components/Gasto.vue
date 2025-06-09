@@ -20,6 +20,8 @@
         }
     })
 
+    defineEmits(['editar-gasto'])
+
     const diccionarioIconos = {
         ahorro : IconoAhorro,
         comida : IconoComida,
@@ -37,25 +39,33 @@
 </script>
 
 <template>
-    <div class="bg-white shadow-xl rounded-xl w-4/5 p-5 m-5 mx-auto">
-        <div class="text-2xl flex justify-between font-black items-center">
-            <p class="flex flex-col justify-center items-center">
+    <div class="bg-white shadow-xl rounded-xl w-4/5 p-5 m-5 mx-auto cursor-pointer hover:bg-green-200"
+            @click="$emit('editar-gasto',gasto.id)"
+    >
+        <div class="text-2xl flex font-black items-center">
+            <div class="w-1/3 flex flex-col justify-center items-start">
                 <img
                     :src="diccionarioIconos[gasto.categoria]"
-                    alt="Icono Gasto"
+                    alt="Icono de Gasto"
                     class="w-14 mb-2"
                 >
-                {{ gasto.nombre }}
-            </p>
-            <p class="first-letter:uppercase pl-28">
-                {{ gasto.categoria }}
-            </p>
-            <p class="flex flex-col items-end">
-                {{ formatearCantidad(gasto.cantidad) }}
+                <p>
+                    {{ gasto.nombre }}
+                </p>
+            </div>
+            <div class="w-1/3 flex items-center justify-center">
+                <p class="first-letter:uppercase">
+                    {{ gasto.categoria }}
+                </p>
+            </div>
+            <div class="flex flex-col justify-center items-end w-1/3">
+                <p>
+                    {{ formatearCantidad(gasto.cantidad) }}
+                </p>
                 <span class="text-sm italic font-extralight">
                     Fecha: {{ formatearFecha(gasto.fecha) }}
                 </span>
-            </p>
+            </div>
         </div>
     </div>
 </template>
