@@ -1,5 +1,20 @@
-# Vue 3 + Vite
+## App - Planificador de Gastos
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+#### Una pequeña página SPA de planificación de gastos hecha en Vue3 donde aprendimos el uso de:
+1) Componentes
+2) Props
+3) Emits
+4) Custom Events
+5) State
+6) Watch
+7) Eventos
+8) Computed
+9) Directivas
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+- Dónde podemos agregar, editar y eliminar registros (gastos).
+- Te dejo el link para que la pruebes: https://app-admin-gastos-vue3-jjbd.netlify.app/
+
+## Author
+
+- [@codigoconjuan](https://www.instagram.com/codigoconjuan/)
+- Perfil en Udemy https://www.udemy.com/user/juanpablodelatorrevaldez/
