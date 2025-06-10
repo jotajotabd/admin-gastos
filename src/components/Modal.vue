@@ -168,7 +168,7 @@ const agregarGasto = () => {
                             :value="[id ? 'Editar Gasto' : 'Añadir Gasto']"
                     >
                     <button v-if="id"
-                            @click="$emit('eliminar-gasto')"
+                            @click="$emit('eliminar-gasto', id)"
                             class="bg-red-500 text-white text-center rounded-xl font-bold px-4 py-2 w-full cursor-pointer hover:bg-red-700 transition-colors"
                     >
                         Eliminar Gasto
