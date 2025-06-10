@@ -144,7 +144,7 @@ const resetearApp = () => {
 </script>
 
 <template>
-    <div class="h-screen" :class="[modal.mostrar] ? 'overflow-scroll': 'overflow-hidden'">
+    <div class="bg-gray-200 h-screen" :class="[modal.mostrar] ? 'overflow-scroll': 'overflow-hidden'">
         <header class="bg-blue-500 p-10">
             <h1 class="text-white font-bold text-center">
                 Planificador de Gastos
