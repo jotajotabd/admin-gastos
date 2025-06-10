@@ -4,7 +4,7 @@ import ImagenCerrarGasto from '../assets/img/cerrar.svg';
 import Alerta from './Alerta.vue';
 
 const error = ref('')
-const emit = defineEmits(['ocultar-modal','guardar-gasto', 'update:nombre', 'update:cantidad', 'update:categoria']);
+const emit = defineEmits(['ocultar-modal','guardar-gasto', 'eliminar-gasto', 'update:nombre', 'update:cantidad', 'update:categoria']);
 const props = defineProps({
     modal:{
         type: Object,
@@ -25,12 +25,18 @@ const props = defineProps({
     disponible:{
         type: Number,
         required: true
-    }
+    },
+    id:{
+        type: [String, null],
+        required: true
+    },
 })
+
+const old = props.cantidad
 
 const agregarGasto = () => {
     // Validando los campos
-    const { nombre, cantidad, categoria, disponible } = props
+    const { nombre, cantidad, categoria, disponible, id } = props
     if ([nombre, cantidad, categoria].includes('')){
         error.value = 'Todos los campos son obligatorios'
         setTimeout(() => {
@@ -52,17 +58,31 @@ const agregarGasto = () => {
         },3000)
         return;
     }
+
     // Validar Disponible
-    if (cantidad > disponible) {
+    if(id){
+        // Tomar en cuenta el gasto realizado (old) y sumarlo más el disponible
+        if(cantidad > old + disponible){
+            error.value = 'Has excedido el presupuesto'
+            setTimeout(() => {
+            error.value = ''
+            },3000)
+            return;
+        }
+
+    }else if (cantidad > disponible) {
+
         error.value = 'Has excedido el presupuesto'
         setTimeout(() => {
             error.value = ''
         },3000)
         return;
     }
-
-
     emit('guardar-gasto')
+}
+
+
+
     // // Emitir el evento para agregar el gasto
     // emit('agregar-gasto', {
     //     nombre,
@@ -76,7 +96,7 @@ const agregarGasto = () => {
     // emit('update:nombre', '');
     // emit('update:cantidad', '');
     // emit('update:categoria', '');
-}
+
 </script>
 
 <template>
@@ -91,7 +111,7 @@ const agregarGasto = () => {
         <div    class="w-3/4 lg:w-1/2 p-6 rounded-lg shadow-lg mb-48 transition-all"
                 :class="(props.modal.animar ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10')"
         >
-        <h2 class="text-white text-2xl font-bold text-center mb-4">Agregar Nuevo Gasto</h2>
+        <h2 class="text-white text-2xl font-bold text-center mb-4">{{ id ? 'Edición de Gasto' : 'Agregar Nuevo Gasto' }}</h2>
         <Alerta v-if="error">
             {{ error }}
         </Alerta>
@@ -142,10 +162,18 @@ const agregarGasto = () => {
                         <option value="gastos">Gastos Varios</option>
                     </select>
                 </div>
+                <div class="gap-2 flex">
                     <input  class="bg-green-500 text-white text-center rounded-xl font-bold px-4 py-2 w-full cursor-pointer hover:bg-green-600 transition-colors"
                             type="submit"
-                            value="Añadir Gasto"
+                            :value="[id ? 'Editar Gasto' : 'Añadir Gasto']"
                     >
+                    <button v-if="id"
+                            @click="$emit('eliminar-gasto')"
+                            class="bg-red-500 text-white text-center rounded-xl font-bold px-4 py-2 w-full cursor-pointer hover:bg-red-700 transition-colors"
+                    >
+                        Eliminar Gasto
+                    </button>
+                </div>
             </form>
         </div>
     </div>
