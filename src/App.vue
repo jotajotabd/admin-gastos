@@ -149,7 +149,7 @@ const resetearApp = () => {
             <h1 class="text-white font-bold text-center">
                 Planificador de Gastos
             </h1>
-            <div class="bg-white shadow-xl rounded-xl w-1/2 mx-auto">
+            <div class="bg-white shadow-xl rounded-xl w-3/4 lg:w-2/4 mx-auto">
                 <Presupuesto
                     v-if="presupuesto === 0"
                     @definir-presupuesto="definirPresupuesto"
@@ -173,7 +173,7 @@ const resetearApp = () => {
                             v-model:filtro="filtro"
                     />
                 </div>
-                <div v-if="gastos.length" class="text-2xl italic font-light text-gray-600 flex justify-between w-4/5 mx-auto p-5 m-5">
+                <div v-if="gastos.length" class="lg:w-2/4 text-2xl italic font-light text-gray-600 flex justify-between w-4/5 mx-auto p-5 m-5">
                     <p>Nombre</p>
                     <p>Categoria</p>
                     <p>Precio</p>
@@ -187,7 +187,7 @@ const resetearApp = () => {
             </div>
             <img    :src="ImagenAgregarGasto"
                     alt="Imagen de agregar gasto"
-                    class="w-20 p-2 m-2 fixed bottom-5 right-5 rounded-full shadow-xl cursor-pointer"
+                    class="w-15 p-2 m-2 fixed bottom-5 right-5 rounded-full shadow-xl cursor-pointer"
                     @click="mostrarModal"
             />
             <Modal  v-if="modal.mostrar"

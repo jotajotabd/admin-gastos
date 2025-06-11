@@ -103,7 +103,7 @@ const agregarGasto = () => {
     <div class="absolute top-0 left-0 w-full h-screen bg-black opacity-96 flex items-center justify-center">
         <div>
             <img    :src="ImagenCerrarGasto" alt="Imagen de cerrar gastos"
-                    class="w-20 p-2 m-2 fixed top-5 right-5 rounded-full shadow-xl cursor-pointer"
+                    class="w-15 p-2 m-2 fixed top-5 right-5 rounded-full shadow-xl cursor-pointer"
                     @click="$emit('ocultar-modal')"
             >
         </div>
@@ -149,17 +149,17 @@ const agregarGasto = () => {
 
                     >
                         <option value="">-- Seleccione --</option>
-                        <option value="salud">Salud</option>
-                        <option value="comida">Comida</option>
                         <option value="ahorro">Ahorro</option>
-                        <option value="deudas">Deudas</option>
-                        <option value="novia">Novia</option>
                         <option value="apuestas">Apuestas</option>
-                        <option value="ocio">Ocio</option>
-                        <option value="licor">Licor</option>
                         <option value="chuches">Chucherias</option>
-                        <option value="suscripciones">Suscripciones</option>
+                        <option value="comida">Comida</option>
+                        <option value="deudas">Deudas</option>
                         <option value="gastos">Gastos Varios</option>
+                        <option value="licor">Licor</option>
+                        <option value="novia">Novia</option>
+                        <option value="ocio">Ocio</option>
+                        <option value="salud">Salud</option>
+                        <option value="suscripciones">Suscripciones</option>
                     </select>
                 </div>
                 <div class="gap-2 flex">

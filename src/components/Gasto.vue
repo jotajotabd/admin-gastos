@@ -39,17 +39,17 @@
 </script>
 
 <template>
-    <div class="bg-white shadow-xl rounded-xl w-4/5 p-5 m-5 mx-auto cursor-pointer hover:bg-green-200"
+    <div class="bg-white shadow-xl rounded-xl lg:w-2/4 w-4/5 p-5 m-5 mx-auto cursor-pointer hover:bg-green-200"
             @click="$emit('editar-gasto',gasto.id)"
     >
-        <div class="text-2xl flex font-black items-center">
-            <div class="w-1/3 flex flex-col justify-center items-start">
+        <div class="text-1xl md:text-2xl flex font-black items-center">
+            <div class="w-1/3 flex flex-col justify-center items-start text-center">
                 <img
                     :src="diccionarioIconos[gasto.categoria]"
                     alt="Icono de Gasto"
                     class="w-14 mb-2"
                 >
-                <p>
+                <p class="text-center">
                     {{ gasto.nombre }}
                 </p>
             </div>

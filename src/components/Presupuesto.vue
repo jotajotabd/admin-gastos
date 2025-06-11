@@ -29,8 +29,8 @@ const definirPresupuesto = () => {
         {{ error }}
     </Alerta>
 
-        <div class="p-2 m-2 font-black text-center text-gray-600">
-            <label for="nuevo-presupuesto" class="block text-2xl mb-5">
+        <div class="p-2 m-2 font-black text-center text-gray-600 mx-auto">
+            <label for="nuevo-presupuesto" class="block text-1xl md:text-2xl mb-5 text-center w-full">
                 Definir Presupuesto
             </label>
             <input  type="number"

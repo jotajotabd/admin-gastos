@@ -34,8 +34,8 @@ const porcentaje = computed(() => {
 </script>
 
 <template>
-    <div class="flex flex-col lg:flex-row justify-center gap-5 bg-white shadow-xl rounded-xl p-5 m-5 items-center mx-auto -mb-40">
-        <div class="flex w-1/2 mx-auto justify-center items-center flex-col gap-5">
+    <div class="flex flex-col lg:flex-row justify-center lg:gap-5 bg-white shadow-xl rounded-xl lg:p-5 lg:m-5 py-5 items-center lg:mx-auto -mb-40 lg:w-2/4">
+        <div class="flex mx-auto justify-center items-center flex-col gap-5 mt-5">
             <CircleProgress
                 :percent="porcentaje"
                 :size="200"
@@ -46,7 +46,7 @@ const porcentaje = computed(() => {
                 {{ porcentaje }}%
             </div>
         </div>
-        <div class="flex flex-col w-1/2 mx-auto justify-center items-center">
+        <div class="flex flex-col w-1/2 mx-auto -mt-10 lg:mt-5 lg:ml-15 justify-center items-center">
             <button type="button"
                     @click="$emit('resetear-app')"
                     class="bg-red-500 text-white rounded-xl font-bold px-4 py-2 w-full cursor-pointer hover:bg-red-600 transition-colors">

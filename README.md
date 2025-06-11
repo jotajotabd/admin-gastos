@@ -12,6 +12,7 @@
 9) Directivas
 
 - Dónde podemos agregar, editar y eliminar registros (gastos).
+- Te dejo el link para que la pruebes: https://app-admin-gastos-vue3-jjbd.netlify.app/
 
 ## Author
 
