@@ -58,11 +58,11 @@
                     {{ gasto.categoria }}
                 </p>
             </div>
-            <div class="flex flex-col justify-center items-end w-1/3">
+            <div class="flex flex-col justify-end items-end w-1/3">
                 <p>
                     {{ formatearCantidad(gasto.cantidad) }}
                 </p>
-                <span class="text-sm italic font-extralight">
+                <span class="italic font-light text-sm">
                     Fecha: {{ formatearFecha(gasto.fecha) }}
                 </span>
             </div>

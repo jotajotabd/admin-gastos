@@ -122,7 +122,7 @@ const agregarGasto = () => {
                     <label for="nombre" class="block text-gray-700 font-bold mb-2">
                         Nombre del Gasto
                     </label>
-                    <input id="nombre" type="text" placeholder="Añade el nombre del gasto"
+                    <input id="nombre" type="text" placeholder="(Ej: Gym, Netflix...)"
                            class="w-full p-2 border border-gray-300 rounded-lg mb-4"
                            :value="nombre"
                            @input="$emit('update:nombre', $event.target.value)"
@@ -132,7 +132,7 @@ const agregarGasto = () => {
                     <label for="cantidad" class="block text-gray-700 font-bold mb-2">
                         Cantidad del Gasto
                     </label>
-                    <input id="cantidad" type="number" placeholder="Añade la cantidad del gasto"
+                    <input id="cantidad" type="number" placeholder="(Ej: 10, 1.000)"
                            class="w-full p-2 border border-gray-300 rounded-lg mb-4"
                            :value="cantidad"
                             @input="$emit('update:cantidad', +$event.target.value)"
@@ -141,7 +141,7 @@ const agregarGasto = () => {
                 </div>
                 <div class="mb-4">
                     <label for="categoria" class="block text-gray-700 font-bold mb-2">
-                        Cantidad del Gasto
+                        Categoria del Gasto
                     </label>
                     <select id="categoria" class="w-full p-2 border border-gray-200 rounded-lg mb-4"
                             :value="categoria"
