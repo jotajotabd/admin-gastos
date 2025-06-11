@@ -42,7 +42,7 @@ const porcentaje = computed(() => {
                 :border-width="30"
                 :border-bg-width="30"
             />
-            <div class="text-blue-500 font-black text-4xl absolute">
+            <div class="text-blue-500 font-black text-4xl relative -top-35">
                 {{ porcentaje }}%
             </div>
         </div>

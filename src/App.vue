@@ -1,6 +1,5 @@
 <script setup>
 import { ref, reactive, watch, computed, onMounted } from 'vue';
-import { uid } from 'uid';
 import { generarId  } from './helpers';
 import Presupuesto from './components/Presupuesto.vue';
 import ControlPresupuesto from './components/ControlPresupuesto.vue';
@@ -11,6 +10,7 @@ import Filtros from './components/Filtros.vue';
 
 const presupuesto = ref(0);
 const disponible = ref(0);
+const gastos = ref([])
 const gastado = ref(0);
 const filtro = ref('')
 
@@ -27,7 +27,6 @@ const gasto = reactive({
     fecha: Date.now()
 })
 
-const gastos = ref([])
 
 watch(gastos, () =>{
     const totalGastado = gastos.value.reduce((total, gasto) => gasto.cantidad + total, 0)
@@ -57,8 +56,10 @@ onMounted(() => {
         disponible.value = Number(presupuestoStorage)
     }
 
-    const gastosStorage = JSON.parse(localStorage.getItem('gastos'))
-    gastos.value = gastosStorage
+    const gastosStorage = localStorage.getItem('gastos')
+    if(gastosStorage){
+        gastos.value = JSON.parse(gastosStorage)
+    }
 })
 
 
@@ -129,9 +130,8 @@ const eliminarGasto = (id) => {
 const gastosFiltrados = computed(() => {
     if(filtro.value){
         return gastos.value.filter(gasto => gasto.categoria === filtro.value)
-    }else{
-        return gastos.value
     }
+    return gastos.value
 })
 
 const resetearApp = () => {
